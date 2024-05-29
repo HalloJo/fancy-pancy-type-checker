@@ -8,11 +8,9 @@ const App = () => {
 
   const [text, setText] = useState(baseSentence);
 
-  const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
-  };
-
-  const handleTextTypeChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleTextChange = (
+    event: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>
+  ) => {
     setText(event.target.value);
   };
 
@@ -28,7 +26,7 @@ const App = () => {
 
           <div>
             <label htmlFor="">Text to check.</label>
-            <input type="text" value={text} onChange={handleTextTypeChange} />
+            <input type="text" value={text} onChange={handleTextChange} />
           </div>
         </div>
         <textarea
