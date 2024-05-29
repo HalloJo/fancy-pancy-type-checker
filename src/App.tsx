@@ -1,19 +1,42 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { ChangeEvent, useState } from "react";
+import fancyLogo from "./assets/fancy-type-checker-logo.svg";
+
 import "./App.scss";
 
 const App = () => {
-  const defaultFoxSentence = "The quick brown fox jumps over the lazy dog";
+  const baseSentence = "The quick brown fox jumps over the lazy dog";
 
-  const [defaultSentence, setDefaultSentence] = useState(defaultFoxSentence);
+  const [text, setText] = useState(baseSentence);
+
+  const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setText(event.target.value);
+  };
+
+  const handleTextTypeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setText(event.target.value);
+  };
 
   return (
-    <div>
-      <div>
-        <h1>Hello World</h1>
+    <div className="h-screen">
+      <div className="flex justify-between flex-row h-full">
+        <div className="p-8">
+          <img
+            src={fancyLogo}
+            className="h-20 mb-4"
+            alt="Fancy Type Checker logo"
+          />
+
+          <div>
+            <label htmlFor="">Text to check.</label>
+            <input type="text" value={text} onChange={handleTextTypeChange} />
+          </div>
+        </div>
+        <textarea
+          className="w-[75%] p-8 h-full text-7xl"
+          value={text}
+          onChange={handleTextChange}
+        />
       </div>
-      <textarea className="output">{defaultSentence}</textarea>
     </div>
   );
 };
