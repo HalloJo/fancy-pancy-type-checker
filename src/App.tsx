@@ -9,6 +9,7 @@ const App = () => {
   const [text, setText] = useState(baseSentence);
   const [fontSize, setFontSize] = useState(50);
   const [fontWeight, setFontWeight] = useState(400);
+  const [lineHeight, setLineHeight] = useState(1);
 
   const handleTextChange = (
     event: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>
@@ -23,6 +24,8 @@ const App = () => {
       setFontSize(parseInt(event.target.value, 10));
     } else if (name === "fontweight") {
       setFontWeight(parseInt(event.target.value, 10));
+    } else if (name === "lineheight") {
+      setLineHeight(parseFloat(event.target.value));
     }
   };
 
@@ -76,12 +79,33 @@ const App = () => {
                 onChange={handleStyleChange}
               />
             </div>
+            <div className="flex flex-col">
+              <label
+                className="w-full flex justify-between"
+                htmlFor="lineheight"
+              >
+                Line-height <span>{lineHeight}</span>
+              </label>
+              <input
+                type="range"
+                name="lineheight"
+                min={0}
+                max={2}
+                step={0.25}
+                value={lineHeight}
+                onChange={handleStyleChange}
+              />
+            </div>
           </div>
         </div>
         <textarea
           className="w-[75%] p-8 h-full text-7xl"
           value={text}
-          style={{ fontSize: `${fontSize}px`, fontWeight: `${fontWeight}` }}
+          style={{
+            fontSize: `${fontSize}px`,
+            fontWeight: `${fontWeight}`,
+            lineHeight: `${lineHeight}`,
+          }}
           onChange={handleTextChange}
         />
       </div>
