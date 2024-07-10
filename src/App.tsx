@@ -3,40 +3,21 @@ import fancyLogo from "./assets/fancy-type-checker-logo.svg";
 
 import "./App.scss";
 import "../src/fonts.scss";
-
-type FontMap = {
-  "Fira Sans": string;
-  "Open Sans": string;
-  Wittgenstein: string;
-  "Roboto Slab": string;
-  Rubik: string;
-  Garamond: string;
-  Archivo: string;
-};
+import { FontMap, fontMap } from "./data/fontmap";
 
 const App = () => {
   const baseSentence = "The quick brown fox jumps over the lazy dog";
 
   const [text, setText] = useState(baseSentence);
-  const [fontSize, setFontSize] = useState(50);
-  const [fontWeight, setFontWeight] = useState(400);
-  const [lineHeight, setLineHeight] = useState(1);
-  const [font, setFont] = useState("");
+  const [fontSize, setFontSize] = useState<number>(50);
+  const [fontWeight, setFontWeight] = useState<number>(400);
+  const [lineHeight, setLineHeight] = useState<number>(1);
+  const [font, setFont] = useState<string>("");
 
   const handleTextChange = (
     event: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>
   ) => {
     setText(event.target.value);
-  };
-
-  const fontMap: FontMap = {
-    "Fira Sans": "font-sans",
-    "Open Sans": "font-openSans",
-    Wittgenstein: "font-wittgenStein",
-    "Roboto Slab": "font-robotoSlab",
-    Rubik: "font-rubik",
-    Garamond: "font-garamond",
-    Archivo: "font-archivo",
   };
 
   const handleStyleChange = (
@@ -133,6 +114,17 @@ const App = () => {
                 onChange={handleStyleChange}
               />
             </div>
+            {/* <div className="flex flex-col">
+              <label className="w-full flex justify-between" htmlFor="italic">
+                Italic
+              </label>
+              <input
+                type="checkbox"
+                name="italic"
+                onChange={handleStyleChange}
+                checked={italic}
+              />
+            </div> */}
           </div>
         </div>
         <textarea
