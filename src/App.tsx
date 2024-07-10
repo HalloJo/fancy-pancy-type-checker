@@ -4,6 +4,7 @@ import fancyLogo from "./assets/fancy-type-checker-logo.svg";
 import "./App.scss";
 import "../src/fonts.scss";
 import { FontMap, fontMap } from "./data/fontmap";
+import { buttons } from "./data/buttons";
 
 const App = () => {
   const baseSentence = "The quick brown fox jumps over the lazy dog";
@@ -13,11 +14,19 @@ const App = () => {
   const [fontWeight, setFontWeight] = useState<number>(400);
   const [lineHeight, setLineHeight] = useState<number>(1);
   const [font, setFont] = useState<string>("");
+  const [colors, setColors] = useState({
+    bgColor: "#000000",
+    textColor: "#ffffff",
+  });
 
   const handleTextChange = (
     event: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>
   ) => {
     setText(event.target.value);
+  };
+
+  const handleColorChange = (bgColor: string, textColor: string) => {
+    setColors({ bgColor, textColor });
   };
 
   const handleStyleChange = (
@@ -123,17 +132,23 @@ const App = () => {
                 onChange={handleStyleChange}
               />
             </div>
-            {/* <div className="flex flex-col">
-              <label className="w-full flex justify-between" htmlFor="italic">
-                Italic
-              </label>
-              <input
-                type="checkbox"
-                name="italic"
-                onChange={handleStyleChange}
-                checked={italic}
-              />
-            </div> */}
+            <div className="flex gap-3">
+              {buttons.map((item, index) => (
+                <button
+                  key={index}
+                  onClick={() =>
+                    handleColorChange(item.bgColor, item.textColor)
+                  }
+                  style={{
+                    backgroundColor: item.bgColor,
+                    color: item.textColor,
+                  }}
+                  className={`p-2 cursor-pointer`}
+                >
+                  {item.text}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
         <textarea
@@ -143,6 +158,8 @@ const App = () => {
             fontSize: `${fontSize}px`,
             fontWeight: `${fontWeight}`,
             lineHeight: `${lineHeight}`,
+            background: `${colors.bgColor}`,
+            color: `${colors.textColor}`,
           }}
           onChange={handleTextChange}
         />
