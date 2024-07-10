@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import fancyLogo from "./assets/fancy-type-checker-logo.svg";
 
 import "./App.scss";
@@ -18,6 +18,23 @@ const App = () => {
     bgColor: "#000000",
     textColor: "#ffffff",
   });
+  const [showMobileMessage, setShowMobileMessage] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobile = window.innerWidth < 768;
+
+      setShowMobileMessage(isMobile);
+    };
+
+    checkMobile();
+
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.addEventListener("resize", checkMobile);
+    };
+  }, []);
 
   const handleTextChange = (
     event: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>
@@ -49,6 +66,19 @@ const App = () => {
 
   return (
     <div className="h-screen">
+      {showMobileMessage && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-md flex items-center justify-center p-8">
+          <div className="bg-black p-8 rounded-lg text-center border border-[#646cff] flex flex-col items-center justify-center">
+            <h2 className="text-2xl mb-4 text-[#5ADB9D] font-bold">
+              Please visit this website on a tablet or desktop.
+            </h2>
+            <p className="text-lg">
+              Mobile experience is not fully supported yet. Cheers!
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="flex justify-between flex-row h-full">
         <div className="p-8 flex-1">
           <img
