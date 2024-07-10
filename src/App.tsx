@@ -47,9 +47,11 @@ const App = () => {
             className="h-20 mb-8"
             alt="Fancy Type Checker logo"
           />
-          <div className="bg-black p-4 rounded-xl">
+          <div className="bg-black p-4 rounded-xl flex flex-col gap-6 ">
             <div className="flex flex-col">
-              <label htmlFor="text">Text to check</label>
+              <label htmlFor="text" className="font-bold">
+                Text to check
+              </label>
               <input
                 type="text"
                 name="text"
@@ -58,7 +60,9 @@ const App = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="font">Typeface</label>
+              <label htmlFor="font" className="font-bold">
+                Typeface
+              </label>
               <select name="font" onChange={handleStyleChange}>
                 {Object.keys(fontMap).map((fontName) => (
                   <option key={fontName} value={fontName}>
@@ -68,8 +72,12 @@ const App = () => {
               </select>
             </div>
             <div className="flex flex-col">
-              <label className="w-full flex justify-between" htmlFor="typesize">
-                Font size <span>{fontSize}px</span>
+              <label
+                className=" w-full flex justify-between font-bold"
+                htmlFor="typesize"
+              >
+                Font size{" "}
+                <span className="font-bold text-[#5ADB9D]">{fontSize}px</span>
               </label>
               <input
                 type="range"
@@ -82,10 +90,11 @@ const App = () => {
             </div>
             <div className="flex flex-col">
               <label
-                className="w-full flex justify-between"
+                className="w-full flex justify-between font-bold"
                 htmlFor="fontweight"
               >
-                Font weight <span>{fontWeight}</span>
+                Font weight{" "}
+                <span className="font-bold text-[#5ADB9D]">{fontWeight}</span>
               </label>
               <input
                 type="range"
@@ -99,10 +108,10 @@ const App = () => {
             </div>
             <div className="flex flex-col">
               <label
-                className="w-full flex justify-between"
+                className="w-full flex justify-between font-bold"
                 htmlFor="lineheight"
               >
-                Line-height <span>{lineHeight}</span>
+                Line-height <span className="text-[#5ADB9D]">{lineHeight}</span>
               </label>
               <input
                 type="range"
